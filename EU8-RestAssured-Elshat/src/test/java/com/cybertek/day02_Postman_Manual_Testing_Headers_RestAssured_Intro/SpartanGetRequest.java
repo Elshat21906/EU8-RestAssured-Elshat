@@ -3,6 +3,7 @@ package com.cybertek.day02_Postman_Manual_Testing_Headers_RestAssured_Intro;
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 public class SpartanGetRequest {
@@ -32,7 +33,10 @@ public class SpartanGetRequest {
 
         //how to do API testing then ?
         //verify status code is 200
+        Assertions.assertEquals(response.statusCode(),200);
+
         //verify content type is application/json
+        Assertions.assertEquals(response.contentType(),"application/json");
 
 
     }
