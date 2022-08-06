@@ -1,4 +1,4 @@
-package com.cybertek.day01;
+package com.cybertek.day01_API_Introduction;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
@@ -19,7 +19,6 @@ public class simpleGetRequest {
 
         // print the response body
         response.prettyPrint();
-
 
     }
 
