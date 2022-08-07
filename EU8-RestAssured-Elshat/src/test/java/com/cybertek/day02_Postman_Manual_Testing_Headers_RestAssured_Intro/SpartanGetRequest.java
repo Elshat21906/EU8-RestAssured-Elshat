@@ -91,13 +91,20 @@ public class SpartanGetRequest {
         Assertions.assertEquals("text/plain;charset=UTF-8",response.contentType());
 
         //verify we have headers named date
-        response.headers().hasHeaderWithName("date");
+        //we use hasHeader with name method to verify header exist or not - it returns boolean
+        Assertions.assertTrue(response.headers().hasHeaderWithName("date"));
 
-        //we use hasHeaderWithname method to verify header exist or not - it returns boolean
         //how to get and header from response using header key ?
         //we use response.header(String headerName) method to get any header value
+        System.out.println("response.header(\"Content-Length\") = " + response.header("Content-Length"));
+        System.out.println("response.header(\"date\") = " + response.header("date"));
+
         //verify content length is 17
+        Assertions.assertEquals("17",response.header("Content-Length"));
+
         //verify body is "Hello from Sparta"
+        Assertions.assertEquals("Hello from Sparta",response.body().asString());
+
     }
 
 
