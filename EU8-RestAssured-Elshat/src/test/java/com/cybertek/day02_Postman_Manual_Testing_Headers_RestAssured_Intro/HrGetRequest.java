@@ -8,6 +8,9 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import static io.restassured.RestAssured.*;
+import static org.junit.jupiter.api.Assertions.*;
+
 public class HrGetRequest {
 
     //BeforeAll is an annotation equals to @BeforeClass in testNg, we use with static method name
@@ -41,20 +44,20 @@ public class HrGetRequest {
     @Test
     public void test2(){
 
-        Response response = RestAssured.given().accept(ContentType.JSON)
+        Response response = given().accept(ContentType.JSON)
                 .when()
                 .get("/regions/2");
 
         //verify status code
-        Assertions.assertEquals(200,response.statusCode());
+        assertEquals(200,response.statusCode());
 
         //verify content type
-        Assertions.assertEquals("application/json",response.contentType());
+        assertEquals("application/json",response.contentType());
 
         response.prettyPrint();
 
         //verify body contains Americas
-        Assertions.assertEquals(response.body().asString().contains("Americas"),true);
+        assertTrue(response.body().asString().contains("Americas"));
 
 
     }
