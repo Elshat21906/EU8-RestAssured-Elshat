@@ -95,7 +95,7 @@ public class SpartanTestsWithParameters {
     @Test
     public void test3(){
 
-        Response response = given().accept(ContentType.JSON)
+        Response response = given().accept(ContentType.JSON).log().all()
                 .and().queryParam("nameContains","e")
                 .and().queryParam("gender","Female")
                 .when()
