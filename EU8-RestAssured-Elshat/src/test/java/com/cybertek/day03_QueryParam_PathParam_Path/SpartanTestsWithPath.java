@@ -1,6 +1,7 @@
 package com.cybertek.day03_QueryParam_PathParam_Path;
 
 
+import com.cybertek.utilitis.SpartansTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.junit.jupiter.api.BeforeAll;
@@ -15,16 +16,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import static io.restassured.RestAssured.baseURI;
 
-public class SpartanTestsWithPath {
-
-    @BeforeAll
-    public static void init(){
-
-        //save baseurl inside this variable so that we dont need to type each http method.
-        baseURI = "http://44.202.119.26:8000";
-
-    }
-
+public class SpartanTestsWithPath extends SpartansTestBase {
 
     /*
      Given accept type is json
