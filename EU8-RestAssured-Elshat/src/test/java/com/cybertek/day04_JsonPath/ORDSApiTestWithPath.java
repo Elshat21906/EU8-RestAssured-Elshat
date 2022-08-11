@@ -7,6 +7,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static io.restassured.RestAssured.*;
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -53,10 +55,17 @@ public class ORDSApiTestWithPath extends HRTestBase {
         String thirdHref = response.path("items[2].links[0].href");
         System.out.println("thirdHref = " + thirdHref);
 
-
         //get me all country names
-
+        List<String > countryNames = response.path("items.country_name");
+        System.out.println("countryNames = " + countryNames);
 
         //assert that all regions ids are equal to 2
+        List<Integer> allRegionsId = response.path("items.region_id");
+
+        for (Integer regionsID : allRegionsId  ) {
+            System.out.println("regionsID = " + regionsID);
+            assertEquals(2,regionsID);
+        }
+
     }
 }
