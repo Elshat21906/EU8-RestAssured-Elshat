@@ -27,14 +27,14 @@ public class ORDSApiTestWithPath extends HRTestBase {
 
     @DisplayName("Get request to countries with Path method")
     @Test
-    public void test1(){
+    public void test1() {
 
         Response response = given().accept(ContentType.JSON)
-                .queryParam("q","{\"region_id\": 2}")
+                .queryParam("q", "{\"region_id\": 2}")
                 .when()
                 .get("/countries");
 
-        assertEquals(200,response.statusCode());
+        assertEquals(200, response.statusCode());
 
 
         //print limit result
@@ -44,28 +44,55 @@ public class ORDSApiTestWithPath extends HRTestBase {
         System.out.println("response.path(\"hasMore\") = " + response.path("hasMore"));
 
         //print first CountryId
-        String countryId = response.path("items[0].country_id");
-        System.out.println("countryId = " + countryId);
+        String firstCountryId = response.path("items[0].country_id");
+        System.out.println("firstCountryId = " + firstCountryId);
 
         //print second country name
         String secondCountryName = response.path("items[1].country_name");
-        System.out.println("countryName = " + secondCountryName);
+        System.out.println("secondCountryName = " + secondCountryName);
 
         //print "http://44.202.63.224:1000/ords/hr/countries/CA"
         String thirdHref = response.path("items[2].links[0].href");
         System.out.println("thirdHref = " + thirdHref);
 
         //get me all country names
-        List<String > countryNames = response.path("items.country_name");
+        List<String> countryNames = response.path("items.country_name");
         System.out.println("countryNames = " + countryNames);
 
         //assert that all regions ids are equal to 2
         List<Integer> allRegionsId = response.path("items.region_id");
 
-        for (Integer regionsID : allRegionsId  ) {
+        for (Integer regionsID : allRegionsId) {
             System.out.println("regionsID = " + regionsID);
-            assertEquals(2,regionsID);
+            assertEquals(2, regionsID);
         }
+
+
+    }
+
+    @DisplayName("GET request to /employees with Query Param")
+    @Test
+    public void test2(){
+
+        Response response = given().accept(ContentType.JSON)
+                .and().queryParam("q","{\"job_id\":\"IT_PROG\"}")
+                .when().get("/employees");
+
+        assertEquals(200,response.statusCode());
+        assertEquals("application/json",response.header("Content-Type"));
+        assertTrue(response.body().asString().contains("IT_PROG"));
+
+
+        //make sure we have only IT_PROG as a job_id
+        List<String> allJobIDs = response.path("items.job_id");
+        for (String JobID : allJobIDs) {
+
+            System.out.println("JobID = " + JobID);
+            assertEquals("IT_PROG",JobID);
+
+        }
+
+
 
     }
 }
