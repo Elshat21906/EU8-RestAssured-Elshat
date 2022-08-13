@@ -17,7 +17,6 @@ public class ORDSApiWithJsonPath  extends HRTestBase {
         Response response = get("/countries");
 
         //get the second country name with JsonPath
-
         //to use jsonpath we assign response to JsonPath
 
 
