@@ -39,9 +39,50 @@ public class HamcrestMatchersApiTest {
       "name",is("Meta"),
                             "gender",is("Female"),
                              "phone",is(1938695106));
+    }
+
+
+    @DisplayName("CBTraining Teacher request with chaining and matchers")
+    @Test
+    public void test2(){
+
+
+           given()
+                   .accept(ContentType.JSON)
+                   .and()
+                   .pathParam("id", 21887)
+        .when()
+                   .get("http://api.cybertektraining.com/teacher/{id}")
+        .then()
+                   .statusCode(200)
+                   .contentType("application/json;charset=UTF-8")
+                   .and()
+                   .header("Content-Type", "application/json;charset=UTF-8")
+                   .and()
+                   .header("Date", notNullValue())
+                   .and().assertThat()
+                   .body("teachers[0].firstName", is("Steve"))
+                   .body("teachers[0].lastName", is("Peter"))
+                   .body("teachers[0].gender", equalTo("Male"));
 
 
 
     }
+
+    @DisplayName("GET request to teacher/all and chaining")
+    @Test
+    public void teachersTest(){
+
+        //verify Steve,Leonel,Leoneli inside the all teachers
+        given()
+                .accept(ContentType.JSON)
+                .when()
+                .get("http://api.cybertektraining.com/teacher/all")
+                .then()
+                .statusCode(200)
+                .and()
+                .body("teachers.firstName",hasItems("Steve","Leonel","Leoneli"));
+    }
+
 
 }
