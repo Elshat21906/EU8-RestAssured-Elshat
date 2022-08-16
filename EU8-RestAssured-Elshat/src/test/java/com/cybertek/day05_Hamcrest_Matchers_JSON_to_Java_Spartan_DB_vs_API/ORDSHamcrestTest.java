@@ -39,6 +39,7 @@ public class ORDSHamcrestTest extends HRTestBase {
                 .contentType("application/json")
                 .body("items.job_id",everyItem(equalTo("IT_PROG")))
                 .body("items.first_name",containsInRelativeOrder("Alexander","Bruce","David","Valli","Diana"))
-                .body("items.email",containsInAnyOrder("AHUNOLD","DLORENTZ","VPATABAL","DAUSTIN","BERNST"));
+                .body("items.email",containsInAnyOrder("AHUNOLD","DLORENTZ","VPATABAL","DAUSTIN","BERNST"))
+                .body("items.first_name",equalTo(names));
     }
 }
