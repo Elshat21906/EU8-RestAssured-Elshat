@@ -28,16 +28,17 @@ public class ORDSHamcrestTest extends HRTestBase {
         //verify emails without checking order (provide emails in different order,just make sure it has same emails)
         //expected names
 
-        List<String> names = Arrays.asList("");
+        List<String> names = Arrays.asList("Alexander","Bruce","David","Valli","Diana");
 
         given().accept(ContentType.JSON)
-                .and().queryParam("\"job_id\"","\"IT_PROG\"")
+                .and().queryParam("q","{\"job_id\": \"IT_PROG\"}")
                 .when()
                 .get("/employees")
         .then()
                 .statusCode(200)
                 .contentType("application/json")
                 .body("items.job_id",everyItem(equalTo("IT_PROG")))
-                .body("items.first_name",containsInRelativeOrder());
+                .body("items.first_name",containsInRelativeOrder("Alexander","Bruce","David","Valli","Diana"))
+                .body("items.email",containsInAnyOrder("DLORENTZ","VPATABAL","DAUSTIN","BERNST","AHUNOLD"));
     }
 }
