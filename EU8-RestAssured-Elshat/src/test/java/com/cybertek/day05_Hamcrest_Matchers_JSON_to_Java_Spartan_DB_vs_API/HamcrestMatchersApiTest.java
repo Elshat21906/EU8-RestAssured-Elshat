@@ -31,7 +31,7 @@ public class HamcrestMatchersApiTest {
                 .accept(ContentType.JSON)
                 .and().pathParam("id",15)
                 .get("http://44.202.119.26:8000/api/spartans/{id}")
-                .then()
+         .then()
                     .statusCode(200)
                     .contentType("application/json")
                     .and()
