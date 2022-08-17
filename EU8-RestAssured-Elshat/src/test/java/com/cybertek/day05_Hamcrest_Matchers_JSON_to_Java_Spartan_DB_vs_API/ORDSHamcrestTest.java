@@ -44,4 +44,16 @@ public class ORDSHamcrestTest extends HRTestBase {
                 .body("items.first_name",equalTo(names));
 
     }
+
+    @Test
+    public void test2(){
+
+        //we want to chain and also get response object
+
+        //extract() --> method that allow us to get response object after we use then() method.
+        //assert that we have only 5 firstnames
+
+        //assert firstnames order
+
+    }
 }
