@@ -45,7 +45,5 @@ public class SpartanPojoGetRequestTest {
     @DisplayName("GET  /spartans/search and save as List<Spartan>")
     @Test
     public void test4(){
-
-
     }
 }
