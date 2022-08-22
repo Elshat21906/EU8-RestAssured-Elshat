@@ -1,4 +1,4 @@
-package com.cybertek.Day6_Pojo_Post_Put_Patch_Delete;
+package com.cybertek.Day06_Pojo_Post_Put_Patch_Delete;
 
 import com.cybertek.utilitis.HRTestBase;
 import org.junit.jupiter.api.DisplayName;
