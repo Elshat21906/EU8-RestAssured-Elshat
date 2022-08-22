@@ -17,6 +17,7 @@ public class SpartanAPIvsDB extends SpartansTestBase {
         //compare
 
 
+
         //1. get id,name,gender phone  from database
 
         //save data inside the map
