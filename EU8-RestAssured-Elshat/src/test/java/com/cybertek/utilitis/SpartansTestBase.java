@@ -21,7 +21,7 @@ public class SpartansTestBase {
 
     }
     @AfterAll
-    public void tearDown(){
+    public static void tearDown(){
 
         DBUtils.destroy();
 
