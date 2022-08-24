@@ -1,14 +1,27 @@
 package com.cybertek.Day06_Pojo_Post_Put_Patch_Delete;
 
+import com.cybertek.utilitis.SpartansTestBase;
+import io.restassured.http.ContentType;
+import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-public class SpartanPojoGetRequestTest {
+import static io.restassured.RestAssured.*;
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.*;
+
+public class SpartanPojoGetRequestTest extends SpartansTestBase {
 
     @DisplayName("GET one spartan and convert it to Spartan Object")
     @Test
     public void oneSpartanPojo(){
 
+        Response response = given().accept(ContentType.JSON)
+                .and().pathParam("id", 15)
+                .when()
+                .get("/api/spartans/{id}")
+                .then().statusCode(200)
+                .extract().response();
 
         //De serialize --> JSON to POJO (java custom class)
         //2 different way to do this
