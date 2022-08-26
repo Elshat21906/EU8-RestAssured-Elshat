@@ -1,5 +1,6 @@
 package com.cybertek.Day06_Pojo_Post_Put_Patch_Delete;
 
+import com.cybertek.pojo.Search;
 import com.cybertek.pojo.Spartan;
 import com.cybertek.utilitis.SpartansTestBase;
 import io.restassured.http.ContentType;
@@ -65,9 +66,22 @@ public class SpartanPojoGetRequestTest extends SpartansTestBase {
 
         ///spartans/search?nameContains=a&gender=Male
         // send get request to above endpoint and save first object with type Spartan POJO
-
+        JsonPath jsonPath = given().accept(ContentType.JSON)
+                .and().queryParams("nameContains", "a"
+                        , "gender", "Male")
+                .when().get("/api/spartans/search")
+                .then()
+                .statusCode(200)
+                .extract().jsonPath();
 
         //get the first spartan from content list and put inside spartan object
+        Spartan s1 = jsonPath.getObject("content[0]", Spartan.class);
+
+        System.out.println("s1 = " + s1);
+        System.out.println("s1.getId() = " + s1.getId());
+        System.out.println("s1.getName() = " + s1.getName());
+        System.out.println("s1.getGender() = " + s1.getGender());
+        System.out.println("s1.getPhone() = " + s1.getPhone());
 
     }
 
@@ -76,6 +90,17 @@ public class SpartanPojoGetRequestTest extends SpartansTestBase {
     @Test
     public void test3(){
 
+        Response response = given().accept(ContentType.JSON)
+                .and().queryParams("nameContains", "a",
+                        "gender", "Male")
+                .when().get("/api/spartans/search")
+                .then()
+                .statusCode(200)
+                .extract().response();
+
+        Search searchResult = response.as(Search.class);
+
+        System.out.println(searchResult.getContent().get(0).getName());
 
     }
 
@@ -86,7 +111,7 @@ public class SpartanPojoGetRequestTest extends SpartansTestBase {
     }
 }
 
-
+//test1
 //De serialize --> JSON to POJO (java custom class)
 //2 different way to do this
 //1.using as() method
@@ -94,5 +119,11 @@ public class SpartanPojoGetRequestTest extends SpartansTestBase {
 //as() method uses jackson to de serialize(converting JSON to Java class)
 
 //second way of deserialize json to java
-//2.using JsonPath to deserialize to custom class
+//2.using JsonPath to deserialize to custom
+
+//test2
+///spartans/search?nameContains=a&gender=Male
+// send get request to above endpoint and save first object with type Spartan POJO
+
+
 
