@@ -28,11 +28,10 @@ public class ORDSPojoGetRequestTest extends HRTestBase{
 
     }
 
-
-
     @DisplayName("GET request to /employees and only get couple of values as a Pojo class")
     @Test
     public void employeeGet(){
+
 
 
     }
