@@ -14,7 +14,7 @@ public abstract class HRTestBase {
 
 
         //get ip address from configuraitons
-        String dbUrl = "jdbc:oracle:thin:@44.202.63.224:1521:xe";
+        String dbUrl = "jdbc:oracle:thin:@44.202.119.26:1521:xe";
         String dbUsername = "hr";
         String dbPassword = "hr";
 
