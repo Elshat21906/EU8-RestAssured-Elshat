@@ -1,5 +1,6 @@
 package com.cybertek.Day06_Pojo_Post_Put_Patch_Delete;
 
+import com.cybertek.pojo.Employee;
 import com.cybertek.pojo.Link;
 import com.cybertek.pojo.Region;
 import com.cybertek.utilitis.HRTestBase;
@@ -32,6 +33,10 @@ public class ORDSPojoGetRequestTest extends HRTestBase{
     @Test
     public void employeeGet(){
 
+        Employee employee1 = get("/employees").then().statusCode(200)
+                .extract().jsonPath().getObject("items[0]", Employee.class);
+
+        System.out.println("employee1 = " + employee1);
 
     }
 
@@ -47,8 +52,8 @@ public class ORDSPojoGetRequestTest extends HRTestBase{
     @Test
     public void regionPojoTest(){
 
-        //send a get request and save everthing inside the regions object
-        //since we prepare pojo also for the all properties we dont need to use any path so as() method is enough
+        //send a get request and save everything inside the regions object
+        //since we prepare pojo also for the all properties we don't need to use any path so as() method is enough
 
         //verify count is 4
 
