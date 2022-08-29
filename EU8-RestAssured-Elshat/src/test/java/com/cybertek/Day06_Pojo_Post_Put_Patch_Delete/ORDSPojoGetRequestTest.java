@@ -3,11 +3,16 @@ package com.cybertek.Day06_Pojo_Post_Put_Patch_Delete;
 import com.cybertek.pojo.Employee;
 import com.cybertek.pojo.Link;
 import com.cybertek.pojo.Region;
+import com.cybertek.pojo.Regions;
 import com.cybertek.utilitis.HRTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -54,18 +59,37 @@ public class ORDSPojoGetRequestTest extends HRTestBase{
 
         //send a get request and save everything inside the regions object
         //since we prepare pojo also for the all properties we don't need to use any path so as() method is enough
+        Regions regions = get("/regions")
+                .then().statusCode(200).extract().response().as(Regions.class);
 
         //verify count is 4
+        assertThat(regions.getCount(),is(4));
 
         //create empty list to store values
+        List<String> regionNames = new ArrayList<>();
+        List<Integer> regionIds = new ArrayList<>();
 
         //get list of regions out of regions object
+        List<Region> items= regions.getItems();
 
         //loop through each of the region, save their ids and names to empty list that we prepare
+        for (Region region : items) {
+
+            regionNames.add(region.getRegionName());
+            regionIds.add(region.getRegionId());
+        }
+
+        System.out.println("regionIds = " + regionIds);
+        System.out.println("regionNames = " + regionNames);
 
         //prepare expected result
+        List<String> expectedRegionsNames = Arrays.asList("Europe" ,"Americas", "Asia", "Middle East and Africa");
+        List<Integer> expectedRegionsIds = Arrays.asList(1,2,3,4);
+
 
         //compare two result
+        assertThat(regionIds,is(expectedRegionsIds));
+        assertThat(regionNames,is(expectedRegionsNames));
 
     }
 
