@@ -6,6 +6,9 @@ import io.restassured.response.Response;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.*;
@@ -37,8 +40,8 @@ public class SpartanPostRequestDemo extends SpartansTestBase {
                 "\"name\":\"Mikela\",\n" +
                 "\"phone\":28375938747}";
 
-        Response response = given().accept(ContentType.JSON).and()
-                .contentType(ContentType.JSON)
+        Response response = given().accept(ContentType.JSON).and()  //what we are asking from api which is JSON response
+                .contentType(ContentType.JSON)//what we are sending to api, which is JSON also
                 .body(requestJsonBody)
                 .when()
                 .post("/api/spartans");
@@ -63,11 +66,29 @@ public class SpartanPostRequestDemo extends SpartansTestBase {
     public void postMethod2() {
 
         //create a map to keep request json body information
+        Map<String,Object> requestJsonMap = new LinkedHashMap<>();
 
+        requestJsonMap.put("name","Mikela");
+        requestJsonMap.put("gender","Male");
+        requestJsonMap.put("phone",28375938747L);
 
+        Response response = given().accept(ContentType.JSON)
+                .and().contentType(ContentType.JSON).log().all()
+                .body(requestJsonMap)
+                .when()
+                .post("/api/spartans");
 
         //verify status code
+        assertThat(response.statusCode(),is(201));
+        assertThat(response.contentType(),is("application/json"));
 
+        String expectedResponseMessage = "A Spartan is Born!";
+        assertThat(response.path("success"),is(expectedResponseMessage));
+        assertThat(response.path("data.name"),is("Mikela"));
+        assertThat(response.path("data.gender"),is("Male"));
+        assertThat(response.path("data.phone"),is(28375938747L));
+
+        response.prettyPrint();
     }
 
 
@@ -76,7 +97,6 @@ public class SpartanPostRequestDemo extends SpartansTestBase {
     @DisplayName("POST with Map to Spartan Class")
     @Test
     public void postMethod3(){
-
 
 
     }
