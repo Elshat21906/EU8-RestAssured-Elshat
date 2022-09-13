@@ -1,5 +1,6 @@
 package com.cybertek.day7_Curl_Post_Put_Delete_with_RestAssured;
 
+import com.cybertek.pojo.Spartan;
 import com.cybertek.utilitis.SpartansTestBase;
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
@@ -98,7 +99,30 @@ public class SpartanPostRequestDemo extends SpartansTestBase {
     @Test
     public void postMethod3(){
 
+        // creat one object from pojo,send it as a JSON
+        Spartan spartan = new Spartan();
+        spartan.setName("MikelaSpartan");
+        spartan.setGender("Male");
+        spartan.setPhone(28375938747L);
 
+        System.out.println("spartan = " + spartan);
+
+        Response response = given().accept(ContentType.JSON)
+                .and().contentType(ContentType.JSON)
+                .body(spartan).log().all()
+                .when()
+                .post("/api/spartans");
+
+        //verify status code
+        assertThat(response.statusCode(),is(201));
+        assertThat(response.contentType(),is("application/json"));
+
+        String expectedResponseMessage = "A Spartan is Born!";
+        assertThat(response.path("success"),is(expectedResponseMessage));
+        assertThat(response.path("data.name"),is("MikelaSpartan"));
+        assertThat(response.path("data.gender"),is("Male"));
+        assertThat(response.path("data.phone"),is(28375938747L));
+        
     }
 
 
