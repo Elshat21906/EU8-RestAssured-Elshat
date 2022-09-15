@@ -101,6 +101,7 @@ public class SpartanPostRequestDemo extends SpartansTestBase {
 
         // creat one object from pojo,send it as a JSON
         Spartan spartan = new Spartan();
+
         spartan.setName("MikelaSpartan");
         spartan.setGender("Male");
         spartan.setPhone(28375938747L);
