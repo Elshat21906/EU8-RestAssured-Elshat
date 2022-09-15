@@ -132,11 +132,51 @@ public class SpartanPostRequestDemo extends SpartansTestBase {
     @Test
     public void postMethod4(){
 
-
-        //this example we implement serialization with creatin spartan object sending as a request body
+        //this example we implement serialization with creating spartan object sending as a request body
         //also implemented deserialization getting the id,sending get request and saving that body as a response
 
         //create one object from your pojo, send it as a JSON
+
+        Spartan spartan = new Spartan();
+
+        spartan.setName("MikelaSpartan");
+        spartan.setGender("Male");
+        spartan.setPhone(28375938747L);
+
+        System.out.println("spartan = " + spartan);
+
+        String expectedResponseMessage = "A Spartan is Born!";
+
+        int idFromPost = given().accept(ContentType.JSON)
+                .and().contentType(ContentType.JSON)
+                .body(spartan).log().all()
+                .when()
+                .post("/api/spartans")
+                .then()
+                .statusCode(201)
+                .contentType("application/json")
+                .body("success", is(expectedResponseMessage))
+                .extract().jsonPath().getInt("data.id");
+
+        System.out.println("idFromPost = " + idFromPost);
+
+        // send a request to id
+        Spartan spartanPosted = given().accept(ContentType.JSON)
+                .and().pathParam("id", idFromPost)
+                .when().get("api/spartans/{id}")
+                .then()
+                .statusCode(200).log().all().extract().as(Spartan.class);
+
+        assertThat(spartanPosted.getName(),is(spartan.getName()));
+        assertThat(spartanPosted.getGender(),is(spartan.getGender()));
+        assertThat(spartanPosted.getPhone(),is(spartan.getPhone()));
+        assertThat(spartanPosted.getId(),is(idFromPost));
+
+
+        // assertThat(response.path("success"),is(expectedResponseMessage));
+       // assertThat(response.path("data.name"),is("MikelaSpartan"));
+       // assertThat(response.path("data.gender"),is("Male"));
+       // assertThat(response.path("data.phone"),is(28375938747L));
     }
 
 
@@ -148,7 +188,7 @@ public class SpartanPostRequestDemo extends SpartansTestBase {
 //create a static method that returns Map<String,Object>
 //use faker library(add as a dependency) to assign each time different information
 //for name,gender,phone number
-//then use your method for creating spartan as a map,dynamically.
+//Then use your method for creating spartan as a map,dynamically.
 
 
 
