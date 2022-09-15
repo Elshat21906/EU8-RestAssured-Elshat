@@ -139,7 +139,7 @@ public class SpartanPostRequestDemo extends SpartansTestBase {
 
         Spartan spartan = new Spartan();
 
-        spartan.setName("MikelaSpartan");
+        spartan.setName("BruceWayne");
         spartan.setGender("Male");
         spartan.setPhone(28375938747L);
 
