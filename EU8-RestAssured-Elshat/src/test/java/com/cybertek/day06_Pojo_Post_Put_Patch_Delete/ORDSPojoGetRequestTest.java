@@ -1,11 +1,9 @@
-package com.cybertek.Day06_Pojo_Post_Put_Patch_Delete;
+package com.cybertek.day06_Pojo_Post_Put_Patch_Delete;
 
 import com.cybertek.pojo.Employee;
-import com.cybertek.pojo.Link;
 import com.cybertek.pojo.Region;
 import com.cybertek.pojo.Regions;
 import com.cybertek.utilitis.HRTestBase;
-import io.restassured.http.ContentType;
 import io.restassured.path.json.JsonPath;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;

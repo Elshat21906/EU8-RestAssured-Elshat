@@ -1,4 +1,4 @@
-package com.cybertek.Day06_Pojo_Post_Put_Patch_Delete;
+package com.cybertek.day06_Pojo_Post_Put_Patch_Delete;
 
 import com.cybertek.pojo.Search;
 import com.cybertek.pojo.Spartan;
@@ -13,7 +13,6 @@ import java.util.List;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
 public class SpartanPojoGetRequestTest extends SpartansTestBase {
 

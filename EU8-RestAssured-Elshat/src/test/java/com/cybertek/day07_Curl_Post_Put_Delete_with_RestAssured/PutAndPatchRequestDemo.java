@@ -1,4 +1,4 @@
-package com.cybertek.day7_Curl_Post_Put_Delete_with_RestAssured;
+package com.cybertek.day07_Curl_Post_Put_Delete_with_RestAssured;
 
 import com.cybertek.utilitis.SpartansTestBase;
 import io.restassured.http.ContentType;
@@ -10,7 +10,6 @@ import java.util.Map;
 
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.MatcherAssert.assertThat;
-import static org.hamcrest.Matchers.*;
 
 public class PutAndPatchRequestDemo extends SpartansTestBase {
 

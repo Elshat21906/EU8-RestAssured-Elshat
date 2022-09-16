@@ -1,4 +1,4 @@
-package com.cybertek.day7_Curl_Post_Put_Delete_with_RestAssured;
+package com.cybertek.day07_Curl_Post_Put_Delete_with_RestAssured;
 
 import com.cybertek.pojo.Spartan;
 import com.cybertek.utilitis.SpartansTestBase;
